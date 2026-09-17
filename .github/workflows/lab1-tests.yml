@@ -1,0 +1,35 @@
+name: DryCleaning CI
+
+on:
+  push:
+    branches: [main, lab1]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+          dotnet-quality: ga
+
+      - name: Restore dependencies
+        run: dotnet restore DryCleaning/DryCleaning.slnx
+
+      - name: Build solution
+        run: dotnet build DryCleaning/DryCleaning.slnx --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --solution DryCleaning/DryCleaning.slnx --configuration Release --no-build --minimum-expected-tests 5
