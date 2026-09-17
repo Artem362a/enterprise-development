@@ -1,5 +1,9 @@
 namespace DryCleaning.Domain;
 
+/// <summary>
+/// Класс, описывающий клиента химчистки.
+/// Содержит уникальный идентификатор, полное имя и номер телефона клиента.
+/// </summary>
 public class Client
 {
     public int ClientId { get; set; }

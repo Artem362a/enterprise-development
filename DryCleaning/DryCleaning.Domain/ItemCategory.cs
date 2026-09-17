@@ -1,5 +1,10 @@
 namespace DryCleaning.Domain;
 
+/// <summary>
+/// Категория изделий, принимаемых в химчистку.
+/// Содержит уникальный идентификатор, название категории,
+/// рекомендуемый вид обработки и стоимость обработки.
+/// </summary>
 public class ItemCategory
 {
     public int CategoryId { get; set; }

@@ -1,9 +1,9 @@
 namespace DryCleaning.Domain;
 
-/// <summary>Creates related dry-cleaning data for examples and tests.</summary>
+/// <summary>Класс создаёт тестовые данные для химчистки.</summary>
 public class TestData
 {
-    /// <summary>The dry-cleaning clients.</summary>
+    /// <summary>Клиенты химчистки.</summary>
     public List<Client> Clients { get; } =
     [
         new Client { ClientId = 1, FullName = "Alexander Kuznetsov", PhoneNumber = "+7 927 416 5823" },
@@ -18,7 +18,7 @@ public class TestData
         new Client { ClientId = 10, FullName = "Maria Vasilyeva", PhoneNumber = "+7 919 582 6473" }
     ];
 
-    /// <summary>The item categories and their prices.</summary>
+    /// <summary>Категории изделий и их цены.</summary>
     public List<ItemCategory> ItemCategories { get; } =
     [
         new ItemCategory { CategoryId = 1, CategoryName = "Clothing", RecommendedCleaningType = CleaningType.DryCleaning, Price = 1500m },
@@ -33,13 +33,13 @@ public class TestData
         new ItemCategory { CategoryId = 10, CategoryName = "Shirts", RecommendedCleaningType = CleaningType.Ironing, Price = 700m }
     ];
 
-    /// <summary>The items belonging to the predefined categories.</summary>
+    /// <summary>Изделия, принадлежащие предопределённым категориям.</summary>
     public List<Item> Items { get; }
 
-    /// <summary>The orders linked to clients and items in this data set.</summary>
+    /// <summary>Заказы, связанные с клиентами и изделиями в этом наборе данных.</summary>
     public List<Order> Orders { get; }
 
-    /// <summary>Creates 10 clients, 10 categories, 20 items, and 20 orders.</summary>
+    /// <summary>Создаёт 10 клиентов, 10 категорий, 20 изделий и 20 заказов.</summary>
     public TestData()
     {
         Items =

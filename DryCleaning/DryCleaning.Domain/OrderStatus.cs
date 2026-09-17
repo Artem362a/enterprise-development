@@ -1,5 +1,9 @@
 namespace DryCleaning.Domain;
 
+/// <summary>
+/// Статус заказа в химчистке.
+/// Может быть одним из следующих значений: Принят, В обработке, Выполнен, Выдан, Отменён.
+/// </summary>
 public enum OrderStatus
 {
     Accepted = 0,
