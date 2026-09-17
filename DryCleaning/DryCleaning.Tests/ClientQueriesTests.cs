@@ -2,11 +2,16 @@ using DryCleaning.Domain;
 
 namespace DryCleaning.Tests;
 
-/// <summary>Verifies dry-cleaning client queries.</summary>
-/// <param name="data">The shared data set created by xUnit.</param>
+/// <summary>
+/// Тесты аналитических запросов по клиентам химчистки.
+/// </summary>
+/// <param name="data">Общий набор тестовых данных.</param>
 public class ClientQueriesTests(TestData data) : IClassFixture<TestData>
 {
-    /// <summary>Verifies the top five clients by item count during the selected period.</summary>
+    /// <summary>
+    /// Проверяет пять клиентов, сдавших больше всего изделий
+    /// за заданный период.
+    /// </summary>
     [Fact]
     public void TopClientsAreSortedByItemCount()
     {
@@ -30,7 +35,10 @@ public class ClientQueriesTests(TestData data) : IClassFixture<TestData>
         Assert.Equal(expectedCounts, clients.Select(client => client.ItemCount));
     }
 
-    /// <summary>Verifies that clients with the longest processing time are unique and sorted by full name.</summary>
+    /// <summary>
+    /// Проверяет клиентов с наибольшей длительностью обработки заказов,
+    /// отсутствие повторов и сортировку по полному имени.
+    /// </summary>
     [Fact]
     public void ClientsWithLongestProcessingAreSortedByName()
     {
@@ -56,7 +64,10 @@ public class ClientQueriesTests(TestData data) : IClassFixture<TestData>
         Assert.Equal(expectedIds, clients.Select(client => client.ClientId));
     }
 
-    /// <summary>Verifies the highest-spending client based on all issued orders.</summary>
+    /// <summary>
+    /// Проверяет клиента, потратившего наибольшую сумму
+    /// по всем выданным заказам.
+    /// </summary>
     [Fact]
     public void HighestSpendingClientIsCalculatedFromIssuedOrders()
     {

@@ -2,11 +2,15 @@ using DryCleaning.Domain;
 
 namespace DryCleaning.Tests;
 
-/// <summary>Verifies item category popularity queries.</summary>
-/// <param name="data">The shared data set created by xUnit.</param>
+/// <summary>
+/// Тесты запросов популярности категорий изделий.
+/// </summary>
+/// <param name="data">Общий набор тестовых данных.</param>
 public class CategoryQueriesTests(TestData data) : IClassFixture<TestData>
 {
-    /// <summary>Verifies the five most and least popular categories over the previous year.</summary>
+    /// <summary>
+    /// Проверяет пять наиболее и пять наименее популярных категорий за последний год.
+    /// </summary>
     [Fact]
     public void CategoryPopularityIsCalculatedForLastYear()
     {

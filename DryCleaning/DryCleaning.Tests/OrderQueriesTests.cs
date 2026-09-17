@@ -2,11 +2,16 @@ using DryCleaning.Domain;
 
 namespace DryCleaning.Tests;
 
-/// <summary>Verifies dry-cleaning order queries.</summary>
-/// <param name="data">The shared data set created by xUnit.</param>
+/// <summary>
+/// Тесты аналитических запросов по заказам химчистки.
+/// </summary>
+/// <param name="data">Общий набор тестовых данных.</param>
 public class OrderQueriesTests(TestData data) : IClassFixture<TestData>
 {
-    /// <summary>Verifies that orders in progress are sorted by acceptance date.</summary>
+    /// <summary>
+    /// Проверяет вывод заказов, находящихся в обработке,
+    /// как они сортируются по дате приёма.
+    /// </summary>
     [Fact]
     public void InProgressOrdersAreSortedByAcceptDate()
     {
