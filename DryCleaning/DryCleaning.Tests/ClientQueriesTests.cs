@@ -24,7 +24,7 @@ public class ClientQueriesTests(TestData data) : IClassFixture<TestData>
             .Where(order => order.AcceptDate >= start && order.AcceptDate < end)
             .Where(order => order.Status != OrderStatus.Cancelled)
             .GroupBy(order => order.Client.ClientId)
-            .Select(group => new { Client = group.First().Client, ItemCount = group.Count() })
+            .Select(group => new { group.First().Client, ItemCount = group.Count() })
             .OrderByDescending(client => client.ItemCount)
             .ThenBy(client => client.Client.FullName, StringComparer.Ordinal)
             .ThenBy(client => client.Client.ClientId)
@@ -77,7 +77,7 @@ public class ClientQueriesTests(TestData data) : IClassFixture<TestData>
         var client = data.Orders
             .Where(order => order.Status == OrderStatus.Issued)
             .GroupBy(order => order.Client.ClientId)
-            .Select(group => new { Client = group.First().Client, TotalSpent = group.Sum(order => order.Item.Category.Price) })
+            .Select(group => new { group.First().Client, TotalSpent = group.Sum(order => order.Item.Category.Price) })
             .OrderByDescending(client => client.TotalSpent)
             .ThenBy(client => client.Client.FullName, StringComparer.Ordinal)
             .ThenBy(client => client.Client.ClientId)
