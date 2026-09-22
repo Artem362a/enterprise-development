@@ -7,8 +7,20 @@ namespace DryCleaning.Domain;
 /// </summary>
 public class ItemCategory
 {
+    /// <summary>
+    /// Уникальный идентификатор категории
+    /// </summary>
     public int CategoryId { get; set; }
+    /// <summary>
+    /// Название категории
+    /// </summary>
     public required string CategoryName { get; set; }
+    /// <summary>
+    /// Рекомендуемый вид обработки
+    /// </summary>
     public required CleaningType RecommendedCleaningType { get; set; }
+    /// <summary>
+    /// Стоимость обработки
+    /// </summary>
     public required decimal Price { get; set; }
 }
