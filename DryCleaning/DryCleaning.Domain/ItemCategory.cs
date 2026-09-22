@@ -1,3 +1,5 @@
+using DryCleaning.Domain.Enum;
+
 namespace DryCleaning.Domain;
 
 /// <summary>
