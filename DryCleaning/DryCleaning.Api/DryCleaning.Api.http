@@ -1,0 +1,263 @@
+@host = https://localhost:3622
+
+# КОРРЕКТНЫЕ ЗАПРОСЫ
+# Клиенты
+
+# Получить список клиентов — 200 OK.
+GET {{host}}/api/clients
+
+###
+# Создать клиента — 201 Created.
+POST {{host}}/api/clients
+Content-Type: application/json
+
+{
+  "fullName": "John Doe",
+  "phoneNumber": "+7 123 456 7890"
+}
+
+###
+# Обновить созданного клиента — 204 No Content.
+PUT {{host}}/api/clients/11
+Content-Type: application/json
+
+{
+  "fullName": "Vasiliy Pupkin",
+  "phoneNumber": "+7 800 555 35 35"
+}
+
+###
+# Проверить обновлённого клиента — 200 OK.
+GET {{host}}/api/clients/11
+
+###
+# Удалить созданного клиента без заказов — 204 No Content.
+DELETE {{host}}/api/clients/11
+
+###
+# Категории
+
+# Получить список категорий — 200 OK.
+GET {{host}}/api/categories
+
+###
+# Создать категорию — 201 Created.
+POST {{host}}/api/categories
+Content-Type: application/json
+
+{
+  "categoryName": "Hats",
+  "recommendedCleaningType": 0,
+  "price": 900
+}
+
+###
+# Обновить созданную категорию — 204 No Content.
+PUT {{host}}/api/categories/11
+Content-Type: application/json
+
+{
+  "categoryName": "Dresses",
+  "recommendedCleaningType": 1,
+  "price": 200
+}
+
+###
+# Проверить обновлённую категорию — 200 OK.
+GET {{host}}/api/categories/11
+
+###
+# Удалить категорию, которую не используют изделия — 204 No Content.
+DELETE {{host}}/api/categories/11
+
+###
+# Изделия
+
+# Получить список изделий — 200 OK.
+GET {{host}}/api/items
+
+###
+# Создать изделие в существующей категории — 201 Created.
+POST {{host}}/api/items
+Content-Type: application/json
+
+{
+  "name": "Hat",
+  "material": "Cotton",
+  "categoryId": 1
+}
+
+###
+# Обновить созданное изделие — 204 No Content.
+PUT {{host}}/api/items/21
+Content-Type: application/json
+
+{
+  "name": "New Hat",
+  "material": "Wool",
+  "categoryId": 2
+}
+
+###
+# Проверить обновлённое изделие — 200 OK.
+GET {{host}}/api/items/21
+
+###
+# Удалить изделие, которое не используется в заказах — 204 No Content.
+DELETE {{host}}/api/items/21
+
+###
+# Заказы
+
+# Получить список заказов — 200 OK.
+GET {{host}}/api/orders
+
+###
+# Создать заказ для существующих клиента и изделия — 201 Created.
+POST {{host}}/api/orders
+Content-Type: application/json
+
+{
+  "clientId": 1,
+  "itemId": 1,
+  "processingDays": 5
+}
+
+###
+# Перевести созданный заказ в обработку — 204 No Content.
+PUT {{host}}/api/orders/21
+Content-Type: application/json
+
+{
+  "clientId": 1,
+  "itemId": 1,
+  "status": 1,
+  "processingDays": 7,
+  "completedDate": null
+}
+
+###
+# Проверить обновлённый заказ — 200 OK.
+GET {{host}}/api/orders/21
+
+###
+# Удалить созданный заказ — 204 No Content.
+DELETE {{host}}/api/orders/21
+
+###
+# Аналитика
+
+# Заказы в обработке, отсортированные по дате приёма — 200 OK.
+GET {{host}}/api/orders/in-progress
+
+###
+# Пять клиентов с наибольшим числом изделий за период — 200 OK.
+GET {{host}}/api/clients/top?start=2025-09-15&end=2026-09-15
+
+###
+# Клиент с наибольшими расходами по выданным заказам — 200 OK.
+GET {{host}}/api/clients/top-spender
+
+###
+# Клиенты с максимальной длительностью обработки — 200 OK.
+GET {{host}}/api/clients/longest-processing
+
+###
+# Пять наиболее и наименее популярных категорий за год — 200 OK.
+GET {{host}}/api/categories/popularity?end=2026-03-01
+
+###
+# НЕКОРРЕКТНЫЕ ЗАПРОСЫ
+# Клиенты
+
+# Клиента с таким ID нет — 404 Not Found.
+GET {{host}}/api/clients/9999
+
+###
+# У клиента есть заказы, поэтому удалить его нельзя — 409 Conflict.
+DELETE {{host}}/api/clients/1
+
+###
+# Категории
+
+# Цена должна быть положительной — 400 Bad Request.
+POST {{host}}/api/categories
+Content-Type: application/json
+
+{
+  "categoryName": "Bad Price",
+  "recommendedCleaningType": 0,
+  "price": -100
+}
+
+###
+# Такого способа обработки нет — 400 Bad Request.
+POST {{host}}/api/categories
+Content-Type: application/json
+
+{
+  "categoryName": "Bad Cleaning Type",
+  "recommendedCleaningType": 99,
+  "price": 900
+}
+
+###
+# Категория используется изделиями, поэтому удалить её нельзя — 409 Conflict.
+DELETE {{host}}/api/categories/1
+
+###
+# Изделия
+
+# Указанной категории нет — 400 Bad Request.
+POST {{host}}/api/items
+Content-Type: application/json
+
+{
+  "name": "Unknown Category Item",
+  "material": "Cotton",
+  "categoryId": 9999
+}
+
+###
+# Изделие используется в заказе, поэтому удалить его нельзя — 409 Conflict.
+DELETE {{host}}/api/items/5
+
+###
+# Заказы
+
+# Срок обработки не может быть нулевым — 400 Bad Request.
+POST {{host}}/api/orders
+Content-Type: application/json
+
+{
+  "clientId": 1,
+  "itemId": 1,
+  "processingDays": 0
+}
+
+###
+# Статуса 99 нет; меняем существующий заказ, чтобы проверить именно статус — 400 Bad Request.
+PUT {{host}}/api/orders/1
+Content-Type: application/json
+
+{
+  "clientId": 1,
+  "itemId": 1,
+  "status": 99,
+  "processingDays": 5,
+  "completedDate": null
+}
+
+###
+# Заказа с таким ID нет — 404 Not Found.
+GET {{host}}/api/orders/9999
+
+###
+# Аналитика
+
+# Начало периода позже конца — 400 Bad Request.
+GET {{host}}/api/clients/top?start=2026-09-15&end=2025-09-15
+
+###
+# Не указана дата окончания года — 400 Bad Request.
+GET {{host}}/api/categories/popularity
