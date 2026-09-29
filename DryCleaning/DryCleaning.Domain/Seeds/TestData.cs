@@ -41,6 +41,9 @@ public class TestData
     /// <summary>Заказы, связанные с клиентами и изделиями в этом наборе данных.</summary>
     public List<Order> Orders { get; }
 
+    private static DateTime UtcDate(int year, int month, int day) =>
+        new(year, month, day, 0, 0, 0, DateTimeKind.Utc);
+
     /// <summary>Создаёт 10 клиентов, 10 категорий, 20 изделий и 20 заказов.</summary>
     public TestData()
     {
@@ -70,26 +73,26 @@ public class TestData
 
         Orders =
         [
-            new Order { Id = 1, Client = Clients[0], Item = Items[0], Status = OrderStatus.InProgress, ProcessingDays = 10, AcceptDate = new DateTime(2026, 9, 1) },
-            new Order { Id = 2, Client = Clients[0], Item = Items[1], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = new DateTime(2026, 8, 1), CompletedDate = new DateTime(2026, 8, 20) },
-            new Order { Id = 3, Client = Clients[0], Item = Items[2], Status = OrderStatus.Completed, ProcessingDays = 4, AcceptDate = new DateTime(2026, 7, 1), CompletedDate = new DateTime(2026, 7, 20) },
-            new Order { Id = 4, Client = Clients[0], Item = Items[3], Status = OrderStatus.Issued, ProcessingDays = 7, AcceptDate = new DateTime(2026, 6, 1), CompletedDate = new DateTime(2026, 6, 15) },
-            new Order { Id = 5, Client = Clients[0], Item = Items[4], Status = OrderStatus.Cancelled, ProcessingDays = 5, AcceptDate = new DateTime(2026, 5, 1) },
-            new Order { Id = 6, Client = Clients[1], Item = Items[5], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = new DateTime(2026, 4, 1), CompletedDate = new DateTime(2026, 4, 5) },
-            new Order { Id = 7, Client = Clients[1], Item = Items[6], Status = OrderStatus.Issued, ProcessingDays = 6, AcceptDate = new DateTime(2026, 3, 1), CompletedDate = new DateTime(2026, 3, 6) },
-            new Order { Id = 8, Client = Clients[1], Item = Items[7], Status = OrderStatus.Issued, ProcessingDays = 8, AcceptDate = new DateTime(2026, 2, 1), CompletedDate = new DateTime(2026, 2, 11) },
-            new Order { Id = 9, Client = Clients[1], Item = Items[8], Status = OrderStatus.InProgress, ProcessingDays = 7, AcceptDate = new DateTime(2026, 9, 10) },
-            new Order { Id = 10, Client = Clients[2], Item = Items[9], Status = OrderStatus.Completed, ProcessingDays = 3, AcceptDate = new DateTime(2026, 1, 1), CompletedDate = new DateTime(2026, 1, 4) },
-            new Order { Id = 11, Client = Clients[2], Item = Items[10], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = new DateTime(2025, 12, 1), CompletedDate = new DateTime(2025, 12, 8) },
-            new Order { Id = 12, Client = Clients[2], Item = Items[11], Status = OrderStatus.InProgress, ProcessingDays = 6, AcceptDate = new DateTime(2026, 9, 5) },
-            new Order { Id = 13, Client = Clients[3], Item = Items[12], Status = OrderStatus.Issued, ProcessingDays = 4, AcceptDate = new DateTime(2025, 11, 1), CompletedDate = new DateTime(2025, 11, 3) },
-            new Order { Id = 14, Client = Clients[3], Item = Items[13], Status = OrderStatus.Issued, ProcessingDays = 8, AcceptDate = new DateTime(2025, 10, 1), CompletedDate = new DateTime(2025, 10, 20) },
-            new Order { Id = 15, Client = Clients[4], Item = Items[14], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = new DateTime(2025, 9, 20), CompletedDate = new DateTime(2025, 9, 23) },
-            new Order { Id = 16, Client = Clients[4], Item = Items[15], Status = OrderStatus.Completed, ProcessingDays = 5, AcceptDate = new DateTime(2025, 9, 1), CompletedDate = new DateTime(2025, 9, 5) },
-            new Order { Id = 17, Client = Clients[5], Item = Items[16], Status = OrderStatus.Issued, ProcessingDays = 6, AcceptDate = new DateTime(2025, 8, 1), CompletedDate = new DateTime(2025, 8, 7) },
-            new Order { Id = 18, Client = Clients[6], Item = Items[17], Status = OrderStatus.Issued, ProcessingDays = 7, AcceptDate = new DateTime(2025, 7, 1), CompletedDate = new DateTime(2025, 7, 9) },
-            new Order { Id = 19, Client = Clients[7], Item = Items[18], Status = OrderStatus.Accepted, ProcessingDays = 5, AcceptDate = new DateTime(2026, 9, 12) },
-            new Order { Id = 20, Client = Clients[8], Item = Items[19], Status = OrderStatus.Issued, ProcessingDays = 3, AcceptDate = new DateTime(2024, 12, 1), CompletedDate = new DateTime(2024, 12, 4) }
+            new Order { Id = 1, Client = Clients[0], Item = Items[0], Status = OrderStatus.InProgress, ProcessingDays = 10, AcceptDate = UtcDate(2026, 9, 1) },
+            new Order { Id = 2, Client = Clients[0], Item = Items[1], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = UtcDate(2026, 8, 1), CompletedDate = UtcDate(2026, 8, 20) },
+            new Order { Id = 3, Client = Clients[0], Item = Items[2], Status = OrderStatus.Completed, ProcessingDays = 4, AcceptDate = UtcDate(2026, 7, 1), CompletedDate = UtcDate(2026, 7, 20) },
+            new Order { Id = 4, Client = Clients[0], Item = Items[3], Status = OrderStatus.Issued, ProcessingDays = 7, AcceptDate = UtcDate(2026, 6, 1), CompletedDate = UtcDate(2026, 6, 15) },
+            new Order { Id = 5, Client = Clients[0], Item = Items[4], Status = OrderStatus.Cancelled, ProcessingDays = 5, AcceptDate = UtcDate(2026, 5, 1) },
+            new Order { Id = 6, Client = Clients[1], Item = Items[5], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = UtcDate(2026, 4, 1), CompletedDate = UtcDate(2026, 4, 5) },
+            new Order { Id = 7, Client = Clients[1], Item = Items[6], Status = OrderStatus.Issued, ProcessingDays = 6, AcceptDate = UtcDate(2026, 3, 1), CompletedDate = UtcDate(2026, 3, 6) },
+            new Order { Id = 8, Client = Clients[1], Item = Items[7], Status = OrderStatus.Issued, ProcessingDays = 8, AcceptDate = UtcDate(2026, 2, 1), CompletedDate = UtcDate(2026, 2, 11) },
+            new Order { Id = 9, Client = Clients[1], Item = Items[8], Status = OrderStatus.InProgress, ProcessingDays = 7, AcceptDate = UtcDate(2026, 9, 10) },
+            new Order { Id = 10, Client = Clients[2], Item = Items[9], Status = OrderStatus.Completed, ProcessingDays = 3, AcceptDate = UtcDate(2026, 1, 1), CompletedDate = UtcDate(2026, 1, 4) },
+            new Order { Id = 11, Client = Clients[2], Item = Items[10], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = UtcDate(2025, 12, 1), CompletedDate = UtcDate(2025, 12, 8) },
+            new Order { Id = 12, Client = Clients[2], Item = Items[11], Status = OrderStatus.InProgress, ProcessingDays = 6, AcceptDate = UtcDate(2026, 9, 5) },
+            new Order { Id = 13, Client = Clients[3], Item = Items[12], Status = OrderStatus.Issued, ProcessingDays = 4, AcceptDate = UtcDate(2025, 11, 1), CompletedDate = UtcDate(2025, 11, 3) },
+            new Order { Id = 14, Client = Clients[3], Item = Items[13], Status = OrderStatus.Issued, ProcessingDays = 8, AcceptDate = UtcDate(2025, 10, 1), CompletedDate = UtcDate(2025, 10, 20) },
+            new Order { Id = 15, Client = Clients[4], Item = Items[14], Status = OrderStatus.Issued, ProcessingDays = 5, AcceptDate = UtcDate(2025, 9, 20), CompletedDate = UtcDate(2025, 9, 23) },
+            new Order { Id = 16, Client = Clients[4], Item = Items[15], Status = OrderStatus.Completed, ProcessingDays = 5, AcceptDate = UtcDate(2025, 9, 1), CompletedDate = UtcDate(2025, 9, 5) },
+            new Order { Id = 17, Client = Clients[5], Item = Items[16], Status = OrderStatus.Issued, ProcessingDays = 6, AcceptDate = UtcDate(2025, 8, 1), CompletedDate = UtcDate(2025, 8, 7) },
+            new Order { Id = 18, Client = Clients[6], Item = Items[17], Status = OrderStatus.Issued, ProcessingDays = 7, AcceptDate = UtcDate(2025, 7, 1), CompletedDate = UtcDate(2025, 7, 9) },
+            new Order { Id = 19, Client = Clients[7], Item = Items[18], Status = OrderStatus.Accepted, ProcessingDays = 5, AcceptDate = UtcDate(2026, 9, 12) },
+            new Order { Id = 20, Client = Clients[8], Item = Items[19], Status = OrderStatus.Issued, ProcessingDays = 3, AcceptDate = UtcDate(2024, 12, 1), CompletedDate = UtcDate(2024, 12, 4) }
         ];
     }
 }
