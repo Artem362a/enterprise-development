@@ -7,6 +7,10 @@
 GET {{host}}/api/clients
 
 ###
+# Получить все заказы клиента, включая отмененные — 200 OK.
+GET {{host}}/api/clients/1/orders
+
+###
 # Создать клиента — 201 Created.
 POST {{host}}/api/clients
 Content-Type: application/json
@@ -31,6 +35,10 @@ Content-Type: application/json
 GET {{host}}/api/clients/11
 
 ###
+# У созданного клиента пока нет заказов — 200 OK, пустой массив.
+GET {{host}}/api/clients/11/orders
+
+###
 # Удалить созданного клиента без заказов — 204 No Content.
 DELETE {{host}}/api/clients/11
 
@@ -39,6 +47,10 @@ DELETE {{host}}/api/clients/11
 
 # Получить список категорий — 200 OK.
 GET {{host}}/api/categories
+
+###
+# Получить изделия категории — 200 OK.
+GET {{host}}/api/categories/2/items
 
 ###
 # Создать категорию — 201 Created.
@@ -65,6 +77,10 @@ Content-Type: application/json
 ###
 # Проверить обновлённую категорию — 200 OK.
 GET {{host}}/api/categories/11
+
+###
+# У созданной категории пока нет изделий — 200 OK, пустой массив.
+GET {{host}}/api/categories/11/items
 
 ###
 # Удалить категорию, которую не используют изделия — 204 No Content.
@@ -174,12 +190,20 @@ GET {{host}}/api/categories/popularity?end=2026-03-01
 GET {{host}}/api/clients/9999
 
 ###
+# Получить заказы несуществующего клиента — 404 Not Found.
+GET {{host}}/api/clients/9999/orders
+
+###
 # У клиента есть заказы, поэтому удалить его нельзя — 409 Conflict.
 DELETE {{host}}/api/clients/1
 
 ###
 # Категории
 
+# Получить изделия несуществующей категории — 404 Not Found.
+GET {{host}}/api/categories/9999/items
+
+###
 # Цена должна быть положительной — 400 Bad Request.
 POST {{host}}/api/categories
 Content-Type: application/json
